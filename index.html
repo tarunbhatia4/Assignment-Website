@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>University of Regina</title>
+
+  <!-- Google Fonts for better typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- External Icons for interaction -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: rgba(51, 51, 51, 0.8);
+      padding: 15px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.5s ease;
+    }
+
+    nav:hover {
+      background-color: rgba(51, 51, 51, 1);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 5px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease;
+      border-radius: 5px;
+    }
+
+    nav ul li a:hover {
+      background-color: #ff6f61;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-image: url('https://static3.educaedu.ca/adjuntos/20/00/00/university-of-regina-000086_large.jpg');
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      animation: slideIn 1.5s ease-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      font-weight: 300;
+      z-index: 2;
+    }
+
+    .hero button {
+      padding: 12px 24px;
+      background-color: #ff6f61;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      z-index: 2;
+    }
+
+    .hero button:hover {
+      background-color: #ff5733;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      height: 4px;
+      width: 100px;
+      background-color: #ff6f61;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -15px;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 20px;
+      padding-left: 40px;
+    }
+
+    /* Cards for Core and Elective Courses */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #ff6f61;
+    }
+
+    /* Program Structure Table */
+    .table {
+      margin-top: 40px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+      background-color: #ff6f61;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    footer a {
+      color: #ff6f61;
+      text-decoration: none;
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(51, 51, 51, 0.9);
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        transition: all 0.3s ease;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .hero button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="logo">UofR</div>
+  <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  <ul id="menu-list">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#courses">Core Courses</a></li>
+    <li><a href="#capstone">Capstone</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+<!-- Hero Section -->
+<section class="hero">
+  <div>
+    <h1>University of Regina</h1>
+    <h2>Master of Science in Computer Science - Data Science (MSc Data Science) Program</h2>
+    <p>Leading the Future of Data-Driven Solutions</p>
+    <button onclick="location.href='#overview'">Learn More</button>
+  </div>
+</section>
+
+<!-- Program Overview Section -->
+<section id="overview">
+  <h2>Program Overview</h2>
+  <p>The Master of Data Science (MSc Data Science) program is designed to equip students with advanced knowledge and practical skills in data analysis, machine learning, artificial intelligence, and data-driven decision-making. The program emphasizes interdisciplinary learning, hands-on experience, and strong industry connections to ensure graduates are well-prepared to tackle complex data challenges in various sectors.</p>
+  <p><strong>Program Duration:</strong> Full-Time: 28-32 months | Part-Time: Up to 40 months</p>
+</section>
+
+<section id="admission">
+    <h2>Admission Requirements</h2>
+    <p>
+        <strong>Background: </strong> Bachelor’s degree in Computer Science, Statistics, Mathematics, Engineering, or a related field with a strong quantitative component.
+        <br><strong>Prerequisite Knowledge: </strong>Proficiency in programming (Python or R), fundamental statistics, and linear algebra.
+        <br><strong>Application Materials: </strong>Transcripts, statement of purpose, letters of recommendation, resume/CV, and GRE scores (if applicable).
+        <br><strong>Additional Requirements for International Students: </strong>Proof of English proficiency (e.g., TOEFL or IELTS scores).</p>
+</section>
+
+<!-- Program Structure Section -->
+<section id="structure">
+  <h2>Program Structure</h2>
+  <table class="table">
+    <tr>
+      <th>Component</th>
+      <th>Credits</th>
+    </tr>
+    <tr>
+      <td>Core Curriculum</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>Capstone Project</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Internship/Co-op</td>
+      <td>0</td>
+    </tr>
+  </table>
+</section>
+
+<!-- Core Curriculum Section -->
+<section id="courses">
+  <h2>Core Curriculum</h2>
+  <div class="cards">
+    <div class="card">
+        <h3>Python & Data Fundamentals<br>(3 Credits)</h3>
+        <p>Develop advanced programming skills in Python and R, focusing on data manipulation, software development best practices, and coding efficiency.</p>
+    </div>
+    <div class="card">
+        <h3>Foundations of Data Science <br>(3 Credits)</h3>
+        <p>An introductory course covering the entire data science lifecycle, emphasizing data ethics, effective data management practices, and the critical role of data in decision-making.</p>
+    </div>
+    <div class="card">
+        <h3>Statistical Methods for Data Science <br>(3 Credits)</h3>
+        <p>In-depth exploration of advanced statistical techniques, hypothesis testing, and probabilistic models, equipping students with the skills to analyze and interpret complex data.</p>
+    </div>
+    <div class="card">
+        <h3>Machine Learning and Artificial Intelligence <br>(3 Credits)</h3>
+        <p>Dive into supervised and unsupervised learning, neural networks, and deep learning methodologies, with a focus on their applications in real-world scenarios.</p>
+    </div>
+    <div class="card">
+        <h3>Data Engineering and Big Data Technologies <br>(3 Credits)</h3>
+        <p>Learn about distributed computing, cloud platforms, data warehousing, and popular big data frameworks to effectively handle large-scale datasets.</p>
+    </div>
+    <div class="card">
+        <h3>Optimization and Combinatorics for Data Science <br>(3 Credits)</h3>
+        <p>Study mathematical optimization techniques and combinatorial algorithms essential for solving complex data-related problems.</p>
+    </div>
+    <div class="card">
+        <h3>Data Visualization and Communication <br>(3 Credits)</h3>
+        <p>Master the art of data storytelling, utilizing visualization tools to effectively communicate insights and findings to diverse audiences.</p>
+    </div>
+    <div class="card">
+        <h3>Business Analytics and Technical Entrepreneurship <br>(3 Credits)</h3>
+        <p>Explore the intersection of data science and business, applying analytical methods to entrepreneurial strategies and decision-making processes.</p>
+    </div>
+</div>  
+</section>
+
+<section id="elective-courses"></section>
+    <h2>Elective Courses (Choose Credits)</h2>
+    <p>&emsp;&emsp;Students can personalize their learning experience by selecting electives that align with their interests and career aspirations. Example electives include:</p>
+    <ul>
+        <li><strong>Deep Learning and Neural Networks:</strong> Advanced techniques for developing intelligent systems.</li>
+        <li><strong>Natural Language Processing:</strong> Understanding and processing human language data.</li>
+        <li><strong>Reinforcement Learning:</strong> Learning through interaction and feedback.</li>
+        <li><strong>Time Series Analysis and Forecasting:</strong> Techniques for analyzing temporal data.</li>
+        <li><strong>Advanced Data Visualization Techniques:</strong> Cutting-edge tools and methods for impactful visualizations.</li>
+        <li><strong>Ethics in AI and Data Science:</strong> Examining the ethical implications of data use and AI technologies.</li>
+        <li><strong>Statistical Consulting:</strong> Practical experience in consulting and applying statistical methods.</li>
+        <li><strong>Experimental Design and Causal Inference:</strong> Designing experiments to establish cause-and-effect relationships.</li>
+        <li><strong>IoT and Data Science:</strong> Leveraging data from the Internet of Things for innovative solutions.</li>
+    </ul>
+</section>
+<!-- Capstone Project Section -->
+<section id="capstone"></section>
+    <h2>Capstone Project (6 Credits)</h2>
+    <p>A comprehensive project that allows students to apply their knowledge to real-world data science problems. Projects can be undertaken in collaboration with industry partners, ensuring practical relevance and exposure to current industry challenges.</p>
+</section>
+
+<section id="experience">
+    <h2>Professional Experience (0 Credits)</h2>
+    <ul>
+        <li>
+            <strong>Internship/Co-op (0 Credits):</strong>
+            <p>A mandatory 4-8 month industry internship or co-op placement, providing hands-on experience and networking opportunities.</p>
+        </li>
+        <li>
+            <strong>Alternative Option: Research Thesis (0 Credits):</strong>
+            <p>For students interested in academic or research careers, a supervised research project can be undertaken as an alternative to the internship.</p>
+        </li>
+    </ul>
+</section>
+
+<section id="unique-program-features">
+    <h2>Unique Program Features</h2>
+    <ol>
+        <li><strong>Interdisciplinary Curriculum:</strong> Combines computer science, statistics, mathematics, and business analytics for a well-rounded education.</li>
+        <li><strong>Mandatory Professional Experience:</strong> Co-op or internship component ensures practical industry experience before graduation.</li>
+        <li><strong>Strong Emphasis on Artificial Intelligence:</strong> Deep integration of AI and machine learning into the curriculum, reflecting their growing importance.</li>
+        <li><strong>Mathematical Rigor:</strong> Advanced courses in optimization and combinatorics build strong analytical foundations.</li>
+        <li><strong>Flexibility and Customization:</strong> A wide range of electives allows specialization in areas like deep learning, NLP, or data engineering.</li>
+        <li><strong>Capstone Project with Industry Collaboration:</strong> Projects aligned with current industry needs, offering networking opportunities.</li>
+        <li><strong>Global Accessibility and Online Components:</strong> Online modules or blended learning options attract a diverse, global student body.</li>
+        <li><strong>Entrepreneurial and Communication Skills:</strong> Courses on technical entrepreneurship and data communication prepare students for leadership roles.</li>
+        <li><strong>Strong Industry Partnerships:</strong> Collaborations with tech companies and research institutions provide internships, guest lectures, and project collaborations.</li>
+        <li><strong>Cutting-Edge Research Opportunities:</strong> Access to research centers encourages engagement in innovative projects.</li>
+        <li><strong>Comprehensive Support Services:</strong> Career counseling, mentorship, and networking events support student career development.</li>
+    </ol>
+</section>
+<section id="sample-curriculum-timeline">
+    <h2>Curriculum Timeline</h2>
+    <h3>First Semester (Fall)</h3>
+    <ul>
+        <li>Python & Data Fundamentals</li>
+        <li>Foundations of Data Science</li>
+    </ul>
+    <h3>Second Semester (Winter)</h3>
+    <ul>
+        <li>Statistical Methods for Data Science</li>
+        <li>Machine Learning and Artificial Intelligence</li>
+    </ul>
+    <h3>Third Semester (Spring/Summer)</h3>
+    <ul>
+        <li>Optimization and Combinatorics for Data Science</li>
+        <li>Data Engineering and Big Data Technologies</li>
+    </ul>
+    <h3>Fourth Semester (Fall)</h3>
+    <ul>
+        <li>Business Analytics and Technical Entrepreneurship</li>
+        <li>Data Visualization and Communication</li>
+    </ul>
+    <h3>Fifth Semester (Winter)</h3>
+    <ul>
+        <li>Internship/Co-op or Research Thesis (Start)</li>
+        <li>Elective</li>
+    </ul>
+    <h3>Sixth Semester (Spring/Summer)</h3>
+    <ul>
+        <li>Internship/Co-op or Research Thesis (Continuation)</li>
+        <li>Elective</li>
+    </ul>
+    <h3>Seventh Semester (Fall)</h3>
+    <ul>
+        <li>Capstone Project</li>
+    </ul>
+</section>
+
+<section id="program-outcomes">
+    <h2>Program Outcomes</h2>
+    <ul>
+        <li>Graduates will possess advanced technical skills in data analysis, machine learning, and AI.</li>
+        <li>Be adept at handling large-scale data engineering and big data technologies.</li>
+        <li>Have strong problem-solving abilities and mathematical foundations.</li>
+        <li>Effectively communicate data-driven insights to diverse audiences.</li>
+        <li>Gain practical industry experience through internships or co-ops.</li>
+        <li>Be prepared for leadership roles in data science, analytics, and AI-driven organizations.</li>
+    </ul>
+</section>
+
+<section id="program-uniqueness">
+    <h2>Why This Program Stands Out</h2>
+    <ul>
+        <li><strong>Comprehensive and Balanced Curriculum:</strong> Balances theoretical knowledge with practical skills for readiness in the data science field.</li>
+        <li><strong>Industry Integration:</strong> Emphasis on professional experience and collaborations to meet real-world challenges.</li>
+        <li><strong>Flexibility and Customization:</strong> Tailor education to specific interests through a wide range of electives.</li>
+        <li><strong>Global Reach:</strong> Online components attract a diverse student body and foster a global perspective.</li>
+        <li><strong>Entrepreneurial Focus:</strong> Equips students with skills for innovation and leadership in the data science landscape.</li>
+    </ul>
+</section>
+
+<section id="conclusion">
+    <h2>Conclusion</h2>
+    <p>Master of Data Science program aims to be a leader in data science education, combining rigorous academic training with practical industry experience. Its interdisciplinary approach, strong emphasis on AI, flexibility in course selection, and robust industry partnerships uniquely position it to produce highly sought-after graduates in the global data science market. By addressing current trends and anticipating future demands, this program sets the standard for excellence in data science education worldwide.</p>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>If you have any questions or need further information, please reach out:</p>
+  <p><strong>Email:</strong> info@uregina.ca</p>
+  <p><strong>Phone:</strong> +1 (306) 585-4111</p>
+  <p><strong>Address:</strong> 3737 Wascana Parkway, Regina, SK S4S 0A2, Canada</p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2024 University of Regina. All rights reserved.</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu-list');
+      menu.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
